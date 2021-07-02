@@ -1,5 +1,5 @@
 # ticketSystem
-MEAN Stack -Web tickets application  
+MEAN Stack Application -Web tickets application  
 
 How to use:
 
