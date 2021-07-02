@@ -1,0 +1,34 @@
+<div class="toolbar">
+<div class="toolbar-content">
+  <mat-icon aria-hidden="false"  aria-label="Example home icon" (click)=homePage()>home </mat-icon>
+  <span class="selected-title">Ticketline<mat-icon class="material-icons-round">copyright</mat-icon></span>
+  
+  <div *ngIf="role == 'Anonimo'" class="login">
+    <input type="text" class="input-text" placeholder="username" [(ngModel)]="user.username" />
+    <input type="password" class="input-text" placeholder="password" [(ngModel)]="user.password" />
+    <button mat-stroked-button class="btn-login" (click)="login()">Entrar</button>
+    <button mat-stroked-button class="btn-login" (click)="registarUtilizador()">Registar</button>
+  </div>
+  <div *ngIf="role != 'Anonimo'" class="login">
+    <p>Bem Vindo, {{ username }}</p>
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>settings</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/user/conta/editar/{{userId}}"><mat-icon>account_box</mat-icon> Definições de Conta</button>
+      <button mat-menu-item routerLink="/user/conta/alterarPass/{{userId}}"><mat-icon> border_color</mat-icon> Alterar Password</button>
+      <button mat-menu-item routerLink="/user/conta/desativar/{{userId}}"><mat-icon>delete_forever</mat-icon> Desativar Conta</button>
+    </mat-menu>
+    <a (click)="logout()">Terminar Sessão</a>
+  </div>
+</div>
+
+<div class="toolbar-down">
+  <div class="flex-style">
+    <mat-icon>room</mat-icon>
+    <span class="selected" (click)="locais()">Locais de Espetáculos</span>
+  </div>
+  <div class="flex-style">
+    <mat-icon>account_balance</mat-icon>
+    <span class="selected" (click)="eventos()">Eventos</span>
+  </div>
+</div>
+</div>

@@ -1,0 +1,73 @@
+<div class="flex-row-header">
+    <mat-icon>help_outline</mat-icon><p>Todos os locais registados que receberão os eventos e/ou espetáculos.</p>
+</div>
+
+<div *ngFor="let l of locais">
+  <div>
+    <div class="first-box">
+      <div>
+        <span class="title">Nº Local:</span>
+        <span class="detalhe">{{ l._id }}</span>
+      </div>
+      <div>
+        <span class="title">Nome:</span>
+        <span class="detalhe">{{ l.nome }}</span>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="second-box">
+        <div class="row">
+          <span class="title">Lotação Máxima</span>
+          <span class="detalhe">{{ l.lotacao }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Percentagem de Lotação Permitida:</span>
+          <span class="detalhe">{{ l.lotacaoPerc }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Rua:</span>
+          <span class="detalhe">{{ l.rua }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Código de Postal:</span>
+          <span class="detalhe">{{ l.codPostal }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Cidade:</span>
+          <span class="detalhe">{{ l.cidade }}</span>
+        </div>
+        <div class="row">
+          <span class="title">País:</span>
+          <span class="detalhe">{{ l.pais }}</span>
+        </div>
+        <div class="row">
+          <button mat-raised-button (click)=editLocal(l)><mat-icon>edit</mat-icon>Editar</button>
+          <button mat-raised-button (click)=deleteLocal(l._id)><mat-icon>delete_forever</mat-icon>Eliminar</button>
+        </div>
+      </div>
+      <div class="flex-center">
+        <mat-card class="example-card" style="background-image: url('http://localhost:3000/posts/{{l._id}}.png');">
+        </mat-card>
+        <span class="lbl-title">Atualizar Post Promocional</span>
+        <div class="file-upload">
+          <input
+            type="file"
+            class="file-input"
+            name="postpromocional"
+            (change)="onFileSelected($event, l._id)"
+            #fileUpload
+          />
+          <span class="lbl-attach">{{ fileName || "Nenhuma imagem selecionada." }}</span>
+
+          <button class="attach" (click)="fileUpload.click()">
+            <mat-icon> attach_file</mat-icon>
+          </button>
+        </div>
+
+        <p *ngIf="message">{{ message }}</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+

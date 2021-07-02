@@ -1,0 +1,25 @@
+<div class="flex-row">
+<span mat-dialog-title>Dados da Reserva </span>
+<mat-icon>search</mat-icon>
+</div>
+<div class="flex-col" mat-dialog-content>
+    <div>
+        <mat-label>1 reserva para {{eve.nome}}</mat-label>
+    </div>
+    <div>
+        <mat-label>Local :</mat-label><span>{{eve.local}}</span>
+    </div>
+    <div>
+        <mat-label>Inicia a : </mat-label><span>{{eve.dataInicio}}</span>
+    </div>
+    <div>
+        <mat-label>Termina a :</mat-label><span>{{eve.dataFim}}</span>
+    </div>
+    <div>
+        <mat-label>Preço :</mat-label><span>{{eve.preco}}</span>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button (click)="cancel()">Cancelar</button>
+    <button type="submit" (click)="confirm()" mat-raised-button>Confirmar</button>
+</div>

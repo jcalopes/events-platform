@@ -1,0 +1,12 @@
+
+<div class="right-col">
+<h3 class="title">Desativar Perfil</h3>
+<form [formGroup]="form" class="flex-style">
+    <mat-form-field>
+        <mat-label>Confirmar Password</mat-label>
+        <input matInput [errorStateMatcher]="customErrorStateMatcher" formControlName="pass" type="password" [(ngModel)]="password" required/>
+        <mat-error>Campo tem de ter no minimo 8 digitos.</mat-error>
+    </mat-form-field>
+    <button (click)="desativarUser()" mat-raised-button class="btn-submit">Desativar</button>
+</form>
+</div>   

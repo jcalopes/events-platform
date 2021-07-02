@@ -1,0 +1,57 @@
+<div class="layout">
+  <div></div>
+  <div>
+  <h1 class="title">Junta-te à maior plataforma de eventos</h1>
+    <h2 class="title">Regista-te</h2>
+  <form [formGroup]="form" class="flex-style">
+    <mat-form-field>
+      <mat-label>Primeiro Nome</mat-label>
+      <input matInput [errorStateMatcher]="customErrorStateMatcher" formControlName="fname" type="text" [(ngModel)]="newUser.fname" required/>
+      <mat-error>Campo de Preenchimento Obrigatório.Não são permitidos digitos(0-9) e máximo de 50 caracteres.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Segundo Nome</mat-label>
+      <input type="text" [errorStateMatcher]="customErrorStateMatcher" formControlName="lname" required [(ngModel)]="newUser.lname" matInput />
+      <mat-error>Campo de Preenchimento Obrigatório.Não são permitidos digitos(0-9).</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Contacto</mat-label>
+      <input type="number" [errorStateMatcher]="customErrorStateMatcher" formControlName="contact" required  [(ngModel)]="newUser.contact" matInput />
+      <mat-error>Campo tem de ter exatamente 9 digitos.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" [errorStateMatcher]="customErrorStateMatcher" formControlName="email" required [(ngModel)]="newUser.email" matInput />
+      <mat-error>Email inválido.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>NIF</mat-label>
+      <input type="number" [errorStateMatcher]="customErrorStateMatcher" formControlName="nif" required [(ngModel)]="newUser.nif" matInput />
+      <mat-error>Campo tem de ter exatamente 9 digitos.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input type="text" [errorStateMatcher]="customErrorStateMatcher" formControlName="username" required [(ngModel)]="newUser.username" matInput />
+      <mat-error>Campo de Preenchimento Obrigatório e máximo 50 caracteres.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" [errorStateMatcher]="customErrorStateMatcher" formControlName="password" required [(ngModel)]="newUser.password" matInput />
+      <mat-error>Campo tem de ter no minimo 8 caracteres.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label></mat-label>
+      <input matInput />
+      <div>
+        <label>Tipo de Utilizador: </label>
+        <mat-radio-group>
+          <mat-radio-button type="radio" name="role" value="user" (change)="radioChange($event)">Utilizador</mat-radio-button>
+          <mat-radio-button type="radio" name="role" value="promotor" (change)="radioChange($event)">Promotor</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-form-field>
+    <button (click)="addUser()" mat-raised-button class="btn-submit">Registar</button>
+  </form>
+</div>
+  <div></div>
+</div>

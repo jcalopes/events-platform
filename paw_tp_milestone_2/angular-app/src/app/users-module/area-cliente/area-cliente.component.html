@@ -1,0 +1,36 @@
+<div class="layout">
+<div>
+  <h3 class="title">Área Cliente</h3>
+  <div>
+    <div class="flex-style">
+      <div *ngIf="role == 'user' || role == 'admin'" class="flex-row">
+        <mat-icon>add_shopping_cart</mat-icon>
+        <a routerLink="/user/conta/compras/all">Minhas Compras</a>
+      </div>
+      <div *ngIf="role == 'promotor' || role == 'admin'" class="flex-row">
+        <mat-icon>account_balance</mat-icon>
+        <a routerLink="/user/conta/eventos/all">Meus Eventos</a>
+      </div>
+      <div *ngIf="role == 'promotor' || role == 'admin'" class="flex-row">
+        <mat-icon> location_on</mat-icon>
+        <a routerLink="/user/conta/locais/all">Meus Locais</a>
+      </div>
+      <div class="flex-row">
+        <mat-icon>account_box</mat-icon>
+        <a routerLink="/user/conta/editar/{{user}}">Definições de Conta</a>
+      </div>
+      <div class="flex-row">
+        <mat-icon> border_color</mat-icon>
+        <a routerLink="/user/conta/alterarPass/{{user}}">Alterar Password</a>
+      </div>
+      <div class="flex-row">
+        <mat-icon>delete_forever</mat-icon>
+        <a routerLink="/user/conta/desativar/{{user}}">Desativar Conta</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="child">
+  <router-outlet></router-outlet>
+</div>
+</div>

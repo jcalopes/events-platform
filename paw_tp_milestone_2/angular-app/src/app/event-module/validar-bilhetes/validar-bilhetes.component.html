@@ -1,0 +1,48 @@
+<div class="flex-row-header">
+    <mat-icon>help_outline</mat-icon>
+    <p>Validar reservas efetuadas pelos clientes. </p>
+  </div>
+  <div *ngFor="let t of tickets">
+    <div>
+      <div class="first-box">
+        <div>
+          <span class="title">Nº bilhete:</span>
+          <span class="detalhe">{{ t._id }}</span>
+        </div>
+        <div>
+          <span class="title">Nome de Utilizador:</span>
+          <span class="detalhe">{{ t.username }}</span>
+        </div>
+      </div>
+      <div class="flex-row">
+        <div class="second-box">
+          <div class="row">
+            <span class="title">Data da Compra:</span>
+            <span class="detalhe">{{ t.dataCompra }}</span>
+          </div>
+          <div class="row">
+            <span class="title">Evento:</span>
+            <span class="detalhe">{{ t.evento.nome }}</span>
+          </div>
+          <div class="row">
+            <span class="title">Local:</span>
+            <span class="detalhe">{{ t.evento.local }}</span>
+          </div>
+          <div class="row">
+            <span class="title">Data de Inicio:</span>
+            <span class="detalhe">{{ t.evento.dataInicio }}</span>
+          </div>
+          <div class="row">
+            <button mat-raised-button (click)="validar(t)">
+     <mat-icon>check</mat-icon> Validar Reserva
+            </button>
+          </div>
+        </div>
+        <div class="flex-center">
+          <mat-card class="example-card" style="background-image: url('http://localhost:3000/posts/{{t._id}}.png');">
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  

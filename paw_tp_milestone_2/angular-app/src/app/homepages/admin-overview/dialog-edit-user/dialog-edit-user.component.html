@@ -1,0 +1,35 @@
+<div class="right-col" mat-dialog-content>
+    <h3 class="title">Atualizar Perfil</h3>
+    <form [formGroup]="form" class="flex-style">
+        <mat-form-field>
+          <mat-label>Primeiro Nome</mat-label>
+          <input matInput [errorStateMatcher]="customErrorStateMatcher" formControlName="fname" type="text" [(ngModel)]="data.fname" required/>
+          <mat-error>Campo de Preenchimento Obrigatório.Não são permitidos digitos(0-9) e máximo de 50 caracteres.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Segundo Nome</mat-label>
+          <input type="text" [errorStateMatcher]="customErrorStateMatcher" formControlName="lname" required [(ngModel)]="data.lname" matInput />
+          <mat-error>Campo de Preenchimento Obrigatório.Não são permitidos digitos(0-9).</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Contacto</mat-label>
+          <input type="number" [errorStateMatcher]="customErrorStateMatcher" formControlName="contact" required  [(ngModel)]="data.contact" matInput />
+          <mat-error>Campo tem de ter exatamente 9 digitos.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input type="email" [errorStateMatcher]="customErrorStateMatcher" formControlName="email" required [(ngModel)]="data.email" matInput />
+          <mat-error>Email inválido.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>NIF</mat-label>
+          <input type="number" [errorStateMatcher]="customErrorStateMatcher" formControlName="nif" required [(ngModel)]="data.nif" matInput />
+          <mat-error>Campo tem de ter exatamente 9 digitos.</mat-error>
+        </mat-form-field>
+
+        <div mat-dialog-actions>
+            <button  mat-raised-button (click)="cancel()">Cancelar</button>
+            <button type="submit" (click)="updateUser()" mat-raised-button [mat-dialog-close]="data">Guardar Alterações</button>
+            </div>
+      </form>
+</div>

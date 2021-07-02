@@ -1,0 +1,25 @@
+
+.layout{
+    margin-top: 4%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    background-color: #F5F5F5;
+}
+
+.title{
+    font-family: Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color:rgb(33, 49, 60);
+}
+.flex-style{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-submit{
+    background-color: #e41a15;
+    color: white;
+}
+
+.btn-submit:hover{
+    opacity: 90%;
+}

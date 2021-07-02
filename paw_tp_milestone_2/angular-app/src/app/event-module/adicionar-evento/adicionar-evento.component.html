@@ -1,0 +1,84 @@
+<div class="right-col">
+    <h3 class="title">Registar Novo Evento</h3>
+    <form [formGroup]="form" class="flex-style">
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput [errorStateMatcher]="customErrorStateMatcher" formControlName="nome" type="text" [(ngModel)]="evento.nome" required/>
+          <mat-error>Campo de Preenchimento Obrigatório.Não são permitidos digitos(0-9) e máximo de 50 caracteres.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Descrição</mat-label>
+          <input type="text" [errorStateMatcher]="customErrorStateMatcher" formControlName="descricao" required [(ngModel)]="evento.descricao" matInput />
+          <mat-error>Campo de Preenchimento Obrigatório.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Data Inicio</mat-label>
+          <input type="date" [errorStateMatcher]="customErrorStateMatcher" formControlName="dataInicio" required  [(ngModel)]="evento.dataInicio" matInput />
+          <mat-error>Campo de Preenchimento Obrigatório.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Data Fim</mat-label>
+          <input type="date" [errorStateMatcher]="customErrorStateMatcher" formControlName="dataFim" required [(ngModel)]="evento.dataFim" matInput />
+          <mat-error>Campo de Preenchimento Obrigatório.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Preço</mat-label>
+          <input type="number" [errorStateMatcher]="customErrorStateMatcher" formControlName="preco" required [(ngModel)]="evento.preco" matInput />
+          <mat-error>Campo de Preenchimento Obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Selecionar local:</mat-label>
+            <mat-select formControlName="local" (selectionChange)="radioChangeLocal($event)">
+                <mat-option *ngFor="let l of locais" [value]="l.nome">
+                    {{l.nome}}
+                  </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Selecionar categoria:</mat-label>
+            <mat-select formControlName="categoria" (selectionChange)="radioChangeCategoria($event)">
+              <mat-option value="Música">Música</mat-option>
+              <mat-option value="Teatro">Teatro</mat-option>
+              <mat-option value="Dança">Dança</mat-option>
+              <mat-option value="Stand Up Comedy">Stand Up Comedy</mat-option>
+              <mat-option value="Cinema">Cinema</mat-option>
+              <mat-option value="Outros">Outros</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="file-upload">
+            <mat-label>Post Promocional:</mat-label><br>
+            <input
+              type="file"
+              class="file-input"
+              name="postpromocional"
+              (change)="onFileSelected($event)"
+              #fileUpload
+/>
+            <span class="lbl-attach">{{ fileName || "Nenhuma imagem selecionada." }}</span>
+  
+            <button class="attach" (click)="fileUpload.click()">
+              <mat-icon> attach_file</mat-icon>
+            </button>
+          </div>
+        <div>
+            <label>Visivel na Página: </label><br>
+            <mat-radio-group formControlName="visivel">
+              <mat-radio-button type="radio" name="visivel" value="sim" (change)="radioChangeVisivel($event)">Sim</mat-radio-button>
+              <mat-radio-button type="radio" name="visivel" value="nao" (change)="radioChangeVisivel($event)">Não</mat-radio-button>
+            </mat-radio-group>
+          </div><br>
+
+          <div>
+            <label>Obter destaque na página: </label><br>
+            <mat-radio-group formControlName="destaque">
+              <mat-radio-button type="radio" name="destaque" value="sim" (change)="radioChangeDestaque($event)">Sim</mat-radio-button>
+              <mat-radio-button type="radio" name="destaque" value="nao" (change)="radioChangeDestaque($event)">Não</mat-radio-button>
+            </mat-radio-group>
+          </div><br>
+
+        <button type="submit" (click)="addEvent()" mat-raised-button class="btn-submit">Adicionar Evento</button>
+      </form>
+</div>

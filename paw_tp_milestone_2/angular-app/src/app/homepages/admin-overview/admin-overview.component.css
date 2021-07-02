@@ -1,0 +1,33 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.flex-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.div-clients{
+  display: flex;
+  padding-left: 100px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+h3{
+  font-size: 20px;
+  font-family: Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgb(33, 49, 60);
+  font-weight: bold;
+  border-bottom: 1px solid rgb(102, 129, 148);;
+  padding-bottom: 5px;
+}
+
+mat-icon{
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-left: 30px;
+}

@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Atualizar Evento</h1>
+<div class="right-col" mat-dialog-content>
+        <form [formGroup]="form" class="flex-style">
+            <mat-form-field>
+              <mat-label>Nome:</mat-label>
+              <input matInput [errorStateMatcher]="customErrorStateMatcher" formControlName="nome" type="text" [(ngModel)]="data.eve.nome" required/>
+              <mat-error>Campo de Preenchimento Obrigatório.Não são permitidos digitos(0-9) e máximo de 50 caracteres.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Descrição:</mat-label>
+              <input type="text" [errorStateMatcher]="customErrorStateMatcher" formControlName="descricao" required [(ngModel)]="data.eve.descricao" matInput />
+              <mat-error>Campo de Preenchimento Obrigatório.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Data de Inicio:</mat-label>
+              <input type="date" [errorStateMatcher]="customErrorStateMatcher" formControlName="dataInicio" required  [(ngModel)]="data.eve.dataInicio" matInput />
+              <mat-error>Campo de Preenchimento Obrigatório.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Data de Fim:</mat-label>
+              <input type="date" [errorStateMatcher]="customErrorStateMatcher" formControlName="dataFim" required [(ngModel)]="data.eve.dataFim" matInput />
+              <mat-error>Campo de Preenchimento Obrigatório.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Selecionar local:</mat-label>
+              <mat-select formControlName="local" (selectionChange)="radioChangeLocal($event)">
+                  <mat-option *ngFor="let l of data.loc" [value]="l.nome">
+                      {{l.nome}}
+                    </mat-option>
+              </mat-select>
+            </mat-form-field>
+              <div mat-dialog-actions>
+            <button mat-raised-button (click)="cancel()">Cancelar</button>
+            <button type="submit" (click)='checkForm()' mat-raised-button [mat-dialog-close]="data">Guardar Alterações</button>
+            </div>
+          </form>
+</div>

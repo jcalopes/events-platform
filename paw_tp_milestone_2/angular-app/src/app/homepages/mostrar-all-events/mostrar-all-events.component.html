@@ -1,0 +1,62 @@
+<div class="layout">
+    <div class="aside-area">
+<div class="form-search">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input type="text"
+                 placeholder="Nome do evento"
+                 aria-label="Number"
+                 matInput
+                 [formControl]="myControl"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" (click)="updateSelected(option.id)" [value]="option.nome">
+              {{option.nome}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      <button type="submit" mat-raised-button class="btn-search" (click)="verDetalhe()">Pesquisar<mat-icon>search</mat-icon></button>
+    </div>
+      <div class="flex-row" *ngFor='let ev of events'>
+        <mat-card
+          class="example-card"
+          style="background-image: url('http://localhost:3000/posts/{{ev._id}}.png');">
+        </mat-card>
+        <article>
+          <div>
+            <h2>{{ ev.nome }}</h2>
+          </div>
+          <div>
+            <span>Inicia a </span>
+            <span>{{ ev.dataInicio }}</span>
+          </div>
+          <div>
+            <span>Termina a </span>
+            <span>{{ ev.dataFim }}</span>
+          </div>
+          <div>
+            <span>{{ ev.descricao }}</span>
+          </div>
+          <div>
+            <span><mat-icon> location_on</mat-icon></span>
+            <span>{{ ev.local }}</span>
+          </div>
+          <div>
+            <span>Categoria:</span>
+            <span>{{ ev.categoria }}</span>
+          </div>
+          <div *ngIf="role == 'user' || role=='admin'">
+          <button (click)="buyTicket(ev)" mat-raised-button><mat-icon>shopping_cart</mat-icon>Comprar Bilhete</button>
+          </div>
+      </article>
+      </div>
+    </div>
+    <div class="title style-title">
+      <mat-icon>grade</mat-icon>
+      <span>Mais Vendidos</span>
+    </div>
+    <div class="right-area">
+      <app-mostrar-top-eventos></app-mostrar-top-eventos>
+    </div>
+  </div>

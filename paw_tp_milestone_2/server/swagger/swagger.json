@@ -1,0 +1,1573 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Swagger demo for the item REST api demonstrated in class.",
+    "version": "1.0.0",
+    "title": "Swagger Item API",
+    "contact": {
+      "email": "fas@estg.ipp.pt"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Operações sobre utilizadores"
+    },
+    {
+      "name": "Eventos",
+      "description": "Operações sobre eventos"
+    },
+    {
+      "name": "Bilhetes",
+      "description": "Operações sobre bilhetes"
+    },
+    {
+      "name": "Locais",
+      "description": "Operações sobre locais"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Logar utilizador no sistema",
+        "description": "",
+        "operationId": "loginUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Auth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Username ou password fornecida inválida"
+          }
+        }
+      }
+    },
+    "/users/signup": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Adicionar um novo utilizador",
+        "description": "Adicionar um novo utilizador na base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Adicionar um novo utilizador na base de dados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilizador criado",
+            "schema": {
+              "$ref":"#/definitions/User"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          },
+          "401":{
+            "description" : "Password inválida"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/users/updateAccount/{userId}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Editar detalhes de um utilizador",
+        "description": "Atualiza detalhes de um utilizaador na base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          },
+          {
+            "in": "body",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados do utilizador atualizados",
+            "schema": {
+              "$ref":"#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/users/disable/{userId}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Desativar conta de um utilizador",
+        "description": "Desativa a conta de um utilizaador na base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "active":"false"
+            }
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Conta do utilizador desativada",
+            "schema": {
+              "$ref":"#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/users/getUser/{userId}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Obter utilizador",
+        "description": "Obter utilizador por id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item selected",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Item not found"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/users/changePassword/{userId}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Alterar password de um utilizador",
+        "description": "Alterar password de um utilizaador na base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          },
+          {
+            "in":"body",
+            "required":true,
+            "name": "body",
+            "description": "Alterar password de um utilizador na base de dados",
+            "schema": {
+              "$ref": "#/definitions/Password"
+            }
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password do utilizador alterada com sucesso",
+            "schema": {
+              "$ref":"#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/users/deleteAccount/{userId}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Remover conta de um utilizador",
+        "description": "Deletes an item from the database",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Item id to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilizador removido",
+            "schema": {
+              "$ref":"#/definitions/Users"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Item not found"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/eventos/": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "summary": "Obter todos os eventos",
+        "description": "Obter todos os eventos na base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de eventos",
+            "schema": {
+              "$ref":"#/definitions/Eventos"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/eventos/showTopEventos": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "summary": "Obter os principais eventos",
+        "description": "Obter os principais eventos na base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de Top eventos",
+            "schema": {
+              "$ref":"#/definitions/Eventos"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/eventos/showeventspromotor/{promotor}": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "summary": "Obter todos os eventos de um promotor",
+        "description": "Obter todos os eventos de um promotor da base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "path",
+            "name": "promotor",
+            "description": "Username do promotor",
+            "required": true
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de eventos",
+            "schema": {
+              "$ref":"#/definitions/Eventos"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/eventos/showEvento/{eventoId}": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "summary": "Obter um evento",
+        "description": "Obter um evento da base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters":[
+          {
+            "in": "path",
+            "name": "eventoId",
+            "description": "Id do evento",
+            "required": true
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Evento",
+            "schema": {
+              "$ref":"#/definitions/Eventos"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/eventos/createEvento": {
+      "post": {
+        "tags": [
+          "Eventos"
+        ],
+        "summary": "Adicionar um novo evento",
+        "description": "Adicionar um novo evento na base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Evento a ser adicionado na base de dados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Evento"
+            }
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Evento criado",
+            "schema": {
+              "$ref":"#/definitions/Evento"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/eventos/editEvento/{eventoId}": {
+      "put": {
+        "tags": [
+          "Eventos"
+        ],
+        "summary": "Atualizar um evento na base de dados",
+        "description": "Atualiza um evento na base de dados. Se não existir cria um novo evento",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventoId",
+            "description": "Id do evento a atualizar na base de dados",
+            "required": true
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Evento a atualizar na base de dados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventoEditar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Evento atualizado",
+            "schema": {
+              "$ref":"#/definitions/EventoEditar"
+            }
+          },
+          "400": {
+            "description": "Id inválido"
+          },
+          "404": {
+            "description": "Evento não encontrado"
+          },
+          "405": {
+            "description": "Erro de validação"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/eventos/deleteEvento/{eventoId}": {
+      "delete": {
+        "tags": [
+          "Eventos"
+        ],
+        "summary": "Remover um evento",
+        "description": "Remover um evento da base de dados",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "eventoId",
+            "description": "Id do evento a remover na base de dados",
+            "required": true
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Evento removido com sucesso",
+            "schema": {
+              "$ref":"#/definitions/Eventos"
+            }
+          },
+          "400": {
+            "description": "Id inválido"
+          },
+          "404": {
+            "description": "Evento náo encontrado"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+    "/locais/createLocal": {
+      "post": {
+        "tags": ["Locais"],
+        "summary": "Criar um novo local",
+        "description": "Adiciona um novo local na base de bados",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Local que irá ser inserido na base de dados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Local"
+            }
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Local criado",
+            "schema": {
+              "$ref": "#/definitions/Local"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/locais/editLocal/{localId}": {
+      "put": {
+        "tags": ["Locais"],
+        "summary": "Atualizar um local existente",
+        "description": "Atualiza um local existente. Se o local não existir será criado um novo.",
+        "consumes": ["application/json"],
+        "produces": ["application/xml"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "localId",
+            "required": true
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Local a ser atualizado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocalEditar"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Local atualizado",
+            "schema": {
+              "$ref": "#/definitions/Local"
+            }
+          },
+          "400": {
+            "description": "Inválido id"
+          },
+          "404": {
+            "description": "Local não encontrado"
+          },
+          "405": {
+            "description": "Erro na validação"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/locais/": {
+      "get": {
+        "tags": ["Locais"],
+        "summary": "Obter todos os locais",
+        "description": "Obter todos os locais na base de dados",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Locais"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/locais/deleteLocal/{localId}": {
+      "delete": {
+        "tags": ["Locais"],
+        "summary": "Remover um local",
+        "description": "Remover um local da base de dados",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "localId",
+            "in": "path",
+            "description": "Id do local para eliminar",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Local removido com sucesso",
+            "schema": {
+              "$ref": "#/definitions/Locais"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Item not found"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/locais/showLocaisDoPromotor/{username}": {
+      "get": {
+        "tags": ["Locais"],
+        "summary": "Obter locais de um promotor",
+        "description": "Obter locais de um promotor da base de dados.",
+        "consumes": ["application/json"],
+        "produces": ["application/xml"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true
+          },
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Locais do promotor",
+            "schema": {
+              "$ref": "#/definitions/Local"
+            }
+          },
+          "400": {
+            "description": "Inválido id"
+          },
+          "404": {
+            "description": "Local não encontrado"
+          },
+          "405": {
+            "description": "Erro na validação"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/bilhetes/": {
+      "get": {
+        "tags": ["Bilhetes"],
+        "summary": "Obter todos os bilhetes",
+        "description": "Obter todos os bilhetes na base de dados",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Bilhetes"
+            }
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": []
+          }
+        ]
+      }
+    },
+    "/bilhetes/createbilhetes": {
+      "post": {
+        "tags": [
+          "Bilhetes"
+        ],
+        "summary": "Criar um novo bilhete",
+        "description": "Criar um novo bilhete na base de dados",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "apiKey",
+            "in":"header",
+            "name":"x-access-token"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Bilhete a ser criado na base de dados",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Bilhete"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bilhete criado",
+            "schema": {
+              "$ref":"#/definitions/Bilhete"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "item_jwt_auth": [ ]
+          }
+        ]
+      }
+    },
+  "/bilhetes/update/{ticketId}": {
+    "put": {
+      "tags": [
+        "Bilhetes"
+      ],
+      "summary": "Atualizar um bilhete NAO TEM ROUTES /{bilheteId}",
+      "description": "Atualizar um bilhete, se não existir na base de dados é criado um novo bilhete",
+      "consumes": [
+        "application/json"
+      ],
+      "produces": [
+        "application/xml"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "ticketId",
+          "required": true
+        },
+        {
+          "type": "apiKey",
+          "in":"header",
+          "name":"x-access-token"
+        },
+        {
+          "in": "body",
+          "name": "body",
+          "description": "Bilhete a ser atualizado",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Bilhete"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Bilhete atualizado",
+          "schema": {
+            "$ref":"#/definitions/Bilhete"
+          }
+        },
+        "400": {
+          "description": "Id de bilhete inválido"
+        },
+        "404": {
+          "description": "Bilhete não encontrado"
+        },
+        "405": {
+          "description": "Erro de validação"
+        }
+      },
+      "security": [
+        {
+          "item_jwt_auth": [ ]
+        }
+      ]
+    }
+  },
+  "/bilhetes/cancel/{ticketId}": {
+    "put": {
+      "tags": [
+        "Bilhetes"
+      ],
+      "summary": "Cancelar um bilhete",
+      "description": "Cancelar um bilhete da base de dados",
+      "consumes": [
+        "application/json"
+      ],
+      "produces": [
+        "application/xml"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "name": "ticketId",
+          "required": true
+        },
+        {
+          "type": "apiKey",
+          "in":"header",
+          "name":"x-access-token"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Bilhete atualizado",
+          "schema": {
+            "$ref":"#/definitions/Bilhete"
+          }
+        },
+        "400": {
+          "description": "Id de bilhete inválido"
+        },
+        "404": {
+          "description": "Bilhete não encontrado"
+        },
+        "405": {
+          "description": "Erro de validação"
+        }
+      },
+      "security": [
+        {
+          "item_jwt_auth": [ ]
+        }
+      ]
+    }
+  },
+  "/bilhetes/showbilhetescliente/{username}": {
+    "get": {
+      "tags": [
+        "Bilhetes"
+      ],
+      "summary": "Obter bilhetes de um cliente",
+      "description": "Obter bilhetes de um cliente da base de dados",
+      "consumes": [
+        "application/json"
+      ],
+      "produces": [
+        "application/xml"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "description": "Username do cliente",
+          "name": "username",
+          "required": true
+        },
+        {
+          "type": "apiKey",
+          "in":"header",
+          "name":"x-access-token"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Bilhetes do cliente",
+          "schema": {
+            "$ref":"#/definitions/Bilhetes"
+          }
+        },
+        "400": {
+          "description": "Id de bilhete inválido"
+        },
+        "404": {
+          "description": "Bilhete não encontrado"
+        },
+        "405": {
+          "description": "Erro de validação"
+        }
+      },
+      "security": [
+        {
+          "item_jwt_auth": [ ]
+        }
+      ]
+    }
+  },
+  "/bilhetes/showbilhetespromotor/{username}": {
+    "get": {
+      "tags": [
+        "Bilhetes"
+      ],
+      "summary": "Obter bilhetes de um prmotor",
+      "description": "Obter bilhetes de um promotor da base de dados",
+      "consumes": [
+        "application/json"
+      ],
+      "produces": [
+        "application/xml"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "description": "Username do promotor",
+          "name": "username",
+          "required": true
+        },
+        {
+          "type": "apiKey",
+          "in":"header",
+          "name":"x-access-token"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Bilhetes do promotor",
+          "schema": {
+            "$ref":"#/definitions/Bilhetes"
+          }
+        },
+        "400": {
+          "description": "Id de bilhete inválido"
+        },
+        "404": {
+          "description": "Bilhete não encontrado"
+        },
+        "405": {
+          "description": "Erro de validação"
+        }
+      },
+      "security": [
+        {
+          "item_jwt_auth": [ ]
+        }
+      ]
+    }
+  },
+  "/bilhetes/showbilhete/{ticketId}": {
+    "get": {
+      "tags": [
+        "Bilhetes"
+      ],
+      "summary": "Obter um bilhete através do seu id",
+      "description": "Obter um bilhete através do seu id da base de dados",
+      "consumes": [
+        "application/json"
+      ],
+      "produces": [
+        "application/xml"
+      ],
+      "parameters": [
+        {
+          "in": "path",
+          "description": "Id do bilhete",
+          "name": "ticketId",
+          "required": true
+        },
+        {
+          "type": "apiKey",
+          "in":"header",
+          "name":"x-access-token"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Bilhete",
+          "schema": {
+            "$ref":"#/definitions/Bilhete"
+          }
+        },
+        "400": {
+          "description": "Id de bilhete inválido"
+        },
+        "404": {
+          "description": "Bilhete não encontrado"
+        },
+        "405": {
+          "description": "Erro de validação"
+        }
+      },
+      "security": [
+        {
+          "item_jwt_auth": [ ]
+        }
+      ]
+    }
+  },
+  "/bilhetes/upload/{ticketId}": {
+    "post": {
+      "tags": [
+        "Bilhetes"
+      ],
+      "summary": "Upload do omprovativo teste negativo ao covid 19",
+      "description": "Upload do omprovativo teste negativo ao covid 19 para a base de dados",
+      "consumes": [
+        "application/json"
+      ],
+      "produces": [
+        "application/xml"
+      ],
+      "parameters": [
+        {
+          "in": "formData",
+           "name": "TesteCovid",
+           "type": "file",
+           "description": "The file to upload"
+        },
+        {
+          "in": "path",
+          "description": "Id do bilhete para associar o comprovativo",
+          "name": "ticketId",
+          "required": true
+        },
+        {
+          "type": "apiKey",
+          "in":"header",
+          "name":"x-access-token"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Bilhete"
+        },
+        "400": {
+          "description": "Id de bilhete inválido"
+        },
+        "404": {
+          "description": "Bilhete não encontrado"
+        },
+        "405": {
+          "description": "Erro de validação"
+        }
+      },
+      "security": [
+        {
+          "item_jwt_auth": [ ]
+        }
+      ]
+    }
+  }
+  },
+  
+  "securityDefinitions": {
+    "item_jwt_auth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "x-access-token"
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "required": [
+        "username",
+        "password",
+        "role",
+        "fname",
+        "lname",
+        "contact",
+        "email",
+        "nif"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "username1"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345678"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["user", "promotor", "admin"],
+          "default": "user"
+        },
+        "fname": {
+          "type": "string",
+          "example": "Primeiro Nome"
+        },
+        "lname": {
+          "type": "string",
+          "example": "Último Nome"
+        },
+        "contact": {
+          "type": "number",
+          "example": "911000222"
+        },
+        "email": {
+          "type": "string",
+          "example": "email@gmail.com"
+        },
+        "nif": {
+          "type": "number",
+          "example": "123456789"
+        }
+      }
+    },
+    "UserUpdate": {
+      "type": "object",
+      "required": [
+        "fname",
+        "lname",
+        "contact",
+        "email",
+        "nif"
+      ],
+      "properties": {
+        "_id":{
+          "type": "string"
+        },
+        "fname": {
+          "type": "string",
+          "example": "Primeiro Nome"
+        },
+        "lname": {
+          "type": "string",
+          "example": "Último Nome"
+        },
+        "contact": {
+          "type": "number",
+          "example": "911000222"
+        },
+        "email": {
+          "type": "string",
+          "example": "email@gmail.com"
+        },
+        "nif": {
+          "type": "number",
+          "example": "123456789"
+        }
+      }
+    },
+    "Auth":{
+      "type":"object",
+      "required":[
+        "username",
+        "password"
+      ],
+      "properties":{
+        "username": {
+          "type": "string",
+          "example": "promotor"
+        },
+        "password": {
+          "type": "string",
+          "example": "promotor"
+        }
+      }
+    },
+    "Password": {
+      "type": "object",
+      "required": [
+        "password_atual",
+        "password_nova"
+      ],
+      "properties": {
+        "oldPassword": {
+          "type": "string",
+          "example": "12345678"
+        },
+        "password": {
+          "type": "string",
+          "example": "123456789"
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    },
+    "Evento": {
+      "type": "object",
+      "required": [
+        "promotor",
+        "nome",
+        "descricao",
+        "dataInicio",
+        "dataFim",
+        "local",
+        "categoria"
+      ],
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Evento X"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "Descrição"
+        },
+        "dataInicio": {
+          "type": "string",
+          "example": "11-11-2021"
+        },
+        "dataFim": {
+          "type": "string",
+          "example": "11-11-2022"
+        },
+        "local": {
+          "type": "string",
+          "example": "Porto"
+        },
+        "promotor": {
+          "type": "string",
+          "example": "promotor"
+        },
+        "categoria": {
+          "type": "string",
+          "enum": [
+            "Musica",
+            "Teatro",
+            "Danca",
+            "Stand Up Comedy",
+            "Cinema",
+            "Outros"
+          ],
+          "default": "Outros"
+        }
+      }
+    },
+    "EventoEditar": {
+      "type": "object",
+      "required": [
+        "nome",
+        "descricao",
+        "dataInicio",
+        "dataFim"
+      ],
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Evento X"
+        },
+        "descricao": {
+          "type": "string",
+          "example": "Descrição"
+        },
+        "dataInicio": {
+          "type": "string",
+          "example": "11-11-2021"
+        },
+        "dataFim": {
+          "type": "string",
+          "example": "11-13-2021"
+        }
+      }
+    },
+    "Eventos": {
+      "type": "array",
+      "$ref": "#/definitions/Evento"
+    },
+    "Local": {
+      "type": "object",
+      "required": [
+        "username",
+        "nome",
+        "lotacao",
+        "lotacaoPerc",
+        "rua",
+        "codPostal",
+        "cidade",
+        "pais"
+      ],
+      "properties": {
+        "username":{
+          "type":"string",
+          "example":"promotor"
+        },
+        "nome": {
+          "type": "string",
+          "example": "Porto"
+        },
+        "lotacao": {
+          "type": "number",
+          "example": "2000"
+        },
+        "lotacaoPerc":{
+          "type": "number",
+          "example": "50"
+        },
+        "rua": {
+          "type": "string",
+          "example": "Rua dos desaparecidos"
+        },
+        "codPostal": {
+          "type": "string",
+          "example": "4567-123"
+        },
+        "cidade": {
+          "type": "string",
+          "example": "Felgueiras"
+        },
+        "pais": {
+          "type": "string",
+          "example": "Portugal"
+        }
+      }
+    },
+    "LocalEditar": {
+      "type": "object",
+      "required": [
+        "nome",
+        "lotacao",
+        "lotacaoPerc",
+        "rua",
+        "codPostal",
+        "cidade",
+        "pais"
+      ],
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Porto"
+        },
+        "lotacao": {
+          "type": "number",
+          "example": "2000"
+        },
+        "lotacaoPerc":{
+          "type": "number",
+          "example": "50"
+        },
+        "rua": {
+          "type": "string",
+          "example": "Rua dos desaparecidos"
+        },
+        "codPostal": {
+          "type": "string",
+          "example": "4567-123"
+        },
+        "cidade": {
+          "type": "string",
+          "example": "Felgueiras"
+        },
+        "pais": {
+          "type": "string",
+          "example": "Portugal"
+        }
+      }
+    },
+    "Locais": {
+      "type": "array",
+      "$ref": "#/definitions/Local"
+    },
+    "Bilhete": {
+      "type": "object",
+      "required": [
+        "username",
+        "evento",
+        "pago",
+        "valido",
+        "cancelado"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "username1"
+        },
+        "evento":{
+          "type":"object",
+          "example":{
+            "nome":"nome",
+            "local":"local",
+            "datafim":"101101",
+            "datainicio":"dsss" 
+          }
+        }
+      }
+    },
+    "Bilhetes": {
+      "type": "array",
+      "$ref": "#/definitions/Bilhete"
+    }
+  }
+}

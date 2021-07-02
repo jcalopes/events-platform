@@ -1,0 +1,27 @@
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row{
+    display: flex;
+    padding:10px
+}
+
+.example-card {
+    width: 50px;
+    height: 70px;
+    background-size: cover;
+    border: 0px;
+  }
+
+  .onmousehover:hover{
+    cursor: pointer;
+    border-bottom: 1px solid rgb(170, 166, 166);
+  }
+
+  .flex-row>div{
+    padding-left: 5px;
+  }
+
+ 

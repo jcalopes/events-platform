@@ -1,0 +1,157 @@
+.layout {
+  display: grid;
+  grid-template-columns: 25% 30% 45%;
+  grid-template-rows: 35px auto;
+  background-color: #f5f5f5;
+}
+
+.right-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    margin-left: 10px;
+    margin-right: 40px;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    border: solid 1px #ddd;
+  }
+
+  .title {
+    margin-left: 10px;
+    margin-right: 40px;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 3;
+    grid-column-end: 4;
+  }
+  
+  .title > span {
+    margin-left: 10px;
+  }
+
+  .right-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 40px;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    background-color: #faf8f8;
+    border: none;
+  }
+
+  .aside-area {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-right: 10px;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    border: solid 1px #ddd;
+  }
+
+  .example-card {
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    border: 0px;
+  }
+  
+  .flex-row {
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px;
+    border-top: 1px solid rgb(197, 194, 194);
+    border-bottom: 1px solid rgb(197, 194, 194);
+  }
+
+  .flex-row:hover{
+    cursor: pointer;
+    border-color:rgba(156, 154, 154, 0.603);
+    background-color:#f0ecec ;
+  }
+
+  .flex-row > article {
+    padding-left: 30px;
+  }
+  
+  h2{
+    font-size: 20px;
+    line-height: 8px;
+  }
+
+  h3{
+    font-size: 23px;
+    color: rgb(33, 49, 60)94f;
+    font-family: Akzidenz Grotesk BQ Light,Helvetica;
+  }
+
+  .aside-area:first-child{
+    border: none;
+  }
+
+  mat-icon{
+    padding-right: 10px;
+  }
+
+
+  .lbl-title {
+    padding-left: 15px;
+    font-size: 20px;
+    color: rgb(33, 49, 60)94f;
+    font-family: Akzidenz Grotesk BQ Light,Helvetica;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 900px) {
+    .layout {
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: auto auto;
+    }
+
+    .right-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 10px;
+      margin-right: 40px;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      border: solid 1px #ddd;
+    }
+  
+    .title {
+      margin-left: 10px;
+      margin-right: 40px;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
+  
+    .aside-area {
+      display: flex;
+      flex-direction: column;
+      margin-left: 40px;
+      margin-right: 10px;
+      grid-row-start: 2;
+      grid-row-end: 3;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      border: solid 1px #ddd;
+    }
+  
+  }

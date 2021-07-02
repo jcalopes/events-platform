@@ -1,0 +1,54 @@
+<div class="flex-row-header">
+  <mat-icon>help_outline</mat-icon>
+  <p>Todas as minhas compras finalizadas na plataforma.</p>
+</div>
+<div *ngFor="let e of tickets">
+  <div *ngIf="e.validado == true && e.cancelado == false">
+    <div class="first-box">
+      <div>
+        <span class="title">Nº Pedido:</span>
+        <span class="detalhe">{{ e._id }}</span>
+      </div>
+      <div>
+        <span class="title">Data da Compra:</span>
+        <span class="detalhe">{{ e.dataCompra }}</span>
+      </div>
+    </div>
+    <div class="flex-row">
+    <div class="second-box">
+      <div class="row">
+        <span class="title">Evento:</span>
+        <span class="detalhe">{{ e.evento.nome }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Local:</span>
+        <span class="detalhe">{{ e.evento.local }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Data de Inicio:</span>
+        <span class="detalhe">{{ e.evento.dataInicio }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Data de Fim:</span>
+        <span class="detalhe">{{ e.evento.dataFim }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Categoria:</span>
+        <span class="detalhe">{{ e.evento.categoria }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Preço:</span>
+        <span class="detalhe">{{ e.evento.preco }}</span>
+      </div>
+      <div class="row">
+        <span class="title">Promotor:</span>
+        <span class="detalhe">{{ e.evento.promotor }}</span>
+      </div>
+    </div>
+    <div class="flex-center">
+      <mat-card class="example-card" style="background-image: url('http://localhost:3000/posts/{{e.evento.id}}.png');">
+      </mat-card>
+    </div>
+  </div>
+  </div>
+</div>

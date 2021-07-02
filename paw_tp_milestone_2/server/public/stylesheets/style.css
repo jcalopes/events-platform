@@ -1,0 +1,59 @@
+a:hover{
+    font-weight: bold;
+}
+
+li{
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+body{
+    padding-left: 10rem;
+    padding-right: 10rem;
+    padding-top: 2%;
+}
+
+.main-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    margin-top: 10px;
+}
+
+.card-style{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card-style:hover{
+    background-color: #EEE;
+    border: 1px solid  rgb(226, 223, 223);
+}
+
+article > span{
+    text-align: center;
+}
+
+.grid-layout{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr auto;
+}
+
+.grid-1row{
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.grid-2row{
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.grid-3row{
+    text-align: center;
+    background-color: #f4f7f7;
+}

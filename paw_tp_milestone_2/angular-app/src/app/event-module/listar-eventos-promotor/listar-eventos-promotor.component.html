@@ -1,0 +1,56 @@
+<div class="flex-row-header">
+    <mat-icon>help_outline</mat-icon>    <p>Todos os eventos registados que já terminaram.</p>
+</div>
+
+<div *ngFor="let ev of events">
+  <div class="article">
+    <div class="first-box">
+      <div>
+        <span class="title">Nº Evento:</span>
+        <span class="detalhe">{{ ev._id }}</span>
+      </div>
+      <div>
+        <span class="title">Nome:</span>
+        <span class="detalhe">{{ ev.nome }}</span>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="second-box">
+        <div class="row">
+          <span class="title">Descrição::</span>
+          <span class="detalhe">{{ ev.descricao }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Categoria:</span>
+          <span class="detalhe">{{ ev.categoria }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Data de Inicio:</span>
+          <span class="detalhe">{{ ev.dataInicio }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Data de Fim:</span>
+          <span class="detalhe">{{ ev.dataFim }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Local:</span>
+          <span class="detalhe">{{ ev.local }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Visivel no website:</span>
+          <span class="detalhe">{{ ev.visivel }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Destaque no website:</span>
+          <span class="detalhe">{{ ev.destaque }}</span>
+        </div>
+      </div>
+      <mat-card class="example-card">
+        <img
+          mat-card-image
+          src="http://localhost:3000/posts/{{ ev._id }}.png"
+        />
+      </mat-card>
+    </div>
+  </div>
+</div>

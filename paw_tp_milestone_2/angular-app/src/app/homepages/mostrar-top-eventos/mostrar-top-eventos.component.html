@@ -1,0 +1,12 @@
+<div class="flex-col">
+<div class="onmousehover" *ngFor='let ev of eventos'>
+    <div (click)="mostrarDetalhes(ev.id)" class="flex-row">
+    <mat-card class="example-card" style="background-image: url('http://localhost:3000/posts/{{ev.id}}.png');">
+      </mat-card>
+      <div>
+            <h5>{{ev.nome}}</h5>
+            <h6>Começa a {{ev.dataInicio}}</h6>
+      </div>
+    </div>
+</div>
+</div>

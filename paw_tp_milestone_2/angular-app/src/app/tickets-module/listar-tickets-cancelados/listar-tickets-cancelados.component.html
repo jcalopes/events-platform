@@ -1,0 +1,32 @@
+<div *ngFor="let eve of tickets">
+    <div *ngIf="eve.cancelado == true">
+      <div class="first-box">
+        <div>
+          <span class="title">Nº Pedido:</span>
+          <span class="detalhe">{{ eve._id }}</span>
+        </div>
+        <div>
+          <span class="title">Data da Compra:</span>
+          <span class="detalhe">{{ eve.dataCompra }}</span>
+        </div>
+      </div>
+      <div class="second-box">
+        <div class="row">
+          <span class="title">Evento/Espetáculo:</span>
+          <span class="detalhe">{{ eve.evento.nome }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Local:</span>
+          <span class="detalhe">{{ eve.evento.local }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Data de início:</span>
+          <span class="detalhe">{{ eve.evento.dataInicio }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Data de fim:</span>
+          <span class="detalhe">{{ eve.evento.dataFim }}</span>
+        </div>
+      </div>
+    </div>
+  </div>

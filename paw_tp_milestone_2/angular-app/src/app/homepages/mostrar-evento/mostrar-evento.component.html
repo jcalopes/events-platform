@@ -1,0 +1,58 @@
+<div class="layout">
+  <div class="aside-area">
+    <div class="flex-row">
+      <mat-card
+        class="example-card"
+        style="background-image: url('http://localhost:3000/posts/{{currentEvent._id}}.png');">
+      </mat-card>
+      <article>
+        <div>
+          <h2>{{ currentEvent.nome }}</h2>
+        </div>
+        <div>
+          <span>Inicia a </span>
+          <span>{{ currentEvent.dataInicio }}</span>
+        </div>
+        <div>
+          <span>Termina a </span>
+          <span>{{ currentEvent.dataFim }}</span>
+        </div>
+        <div>
+          <span>{{ currentEvent.descricao }}</span>
+        </div>
+        <div>
+          <span><mat-icon> location_on</mat-icon></span>
+          <span>{{ currentEvent.local }}</span>
+        </div>
+        <div>
+          <span>Categoria:</span>
+          <span>{{ currentEvent.categoria }}</span>
+        </div>
+        <div *ngIf="role == 'user' || role == 'admin'">
+        <button (click)="buyTicket(currentEvent)" mat-raised-button><mat-icon>shopping_cart</mat-icon>Comprar Bilhete</button>
+        </div>
+    </article>
+    </div>
+    <div class="info-add">
+        <div class="flex-row">
+        <mat-icon>info</mat-icon>
+        <span class="subtitle-info">Informação Adicional:</span>
+        </div>
+        <ul>
+        <li>
+            Obrigatório o uso de máscara
+        </li>
+        <li>
+            Obrigatório submissão teste de covid antes do inicio do espetáculo
+        </li>
+        </ul>
+    </div>
+  </div>
+  <div class="title style-title">
+    <mat-icon>grade</mat-icon>
+    <span>Mais Vendidos</span>
+  </div>
+  <div class="right-area">
+    <app-mostrar-top-eventos></app-mostrar-top-eventos>
+  </div>
+</div>

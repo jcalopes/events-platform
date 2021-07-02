@@ -1,0 +1,14 @@
+.title {
+    font-family: Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(33, 49, 60);
+    margin-left: 5%;
+    font-weight: bold;
+  }
+
+  mat-tab-group {
+    margin-left: 3%;
+    margin-right: 3%;
+    border-top: 1px solid #cccccc;
+  }
+  
+  

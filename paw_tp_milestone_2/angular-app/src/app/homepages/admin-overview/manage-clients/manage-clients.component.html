@@ -1,0 +1,18 @@
+<h3><mat-icon>supervised_user_circle</mat-icon>Gestão de Utilizadores</h3>
+<table *ngIf="dataSource.length !== 0" >
+    <th>Username</th>
+    <th>Nome</th>
+    <th>Ativo</th>
+    <th>Email</th>
+    <th>Ações</th>
+    <tr *ngFor='let data of dataSource'>
+        <td>{{data.username}}</td>
+        <td>{{data.fname}}</td>
+        <td>{{data.ativo}}</td>
+        <td>{{data.email}}</td>
+        <td><mat-icon (click)=editUser(data)>create</mat-icon><mat-icon (click)='delete(data._id)'>delete_outline</mat-icon></td>
+    </tr>
+  </table> 
+  <div *ngIf="dataSource.length === 0">
+    <mat-icon>error_outline</mat-icon><span>Sem utilizadores registados.</span>
+  </div>

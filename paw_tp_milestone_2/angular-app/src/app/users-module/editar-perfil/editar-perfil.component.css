@@ -1,0 +1,26 @@
+
+.right-col{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding-left: 5%;
+}
+
+.flex-style{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-submit:hover{
+  opacity: 90%;
+}
+
+.btn-submit{
+  background-color: #e41a15;
+  color: white;
+}
+
+.title{
+  font-family: Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:rgb(33, 49, 60);
+}

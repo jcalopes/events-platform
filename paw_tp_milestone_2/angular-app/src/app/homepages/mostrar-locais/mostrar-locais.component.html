@@ -1,0 +1,30 @@
+<div class="layout">
+    <div class="aside-area">
+      <div class="lbl-title">
+        <mat-icon> location_on</mat-icon><h3>Locais de Espetáculo</h3>
+      </div>
+      <div class="flex-row" *ngFor='let l of locais' (click)="selectLocal(l)">
+        <mat-card
+          class="example-card"
+          style="background-image: url('http://localhost:3000/posts/{{l._id}}.png');">
+        </mat-card>
+        <article>
+          <div>
+            <h2>{{ l.nome }}</h2>
+          </div>
+          <div>
+            <span>{{ l.rua }}</span>
+          </div>
+          <div>
+            <span>{{ l.cidade }}</span>
+          </div>
+      </article>
+      </div>
+    </div>
+    <div class="right-area">
+      <div class="lbl-title">
+        <mat-icon>event_available</mat-icon><h3>Eventos Disponiveis {{selectedLocal.nome || ""}}</h3>
+      </div>
+      <app-mostrar-events-locais [loc]="selectedLocal"></app-mostrar-events-locais>
+    </div>
+  </div>

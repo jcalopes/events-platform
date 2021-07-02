@@ -1,0 +1,63 @@
+<div class="flex-row-header">
+  <mat-icon>help_outline</mat-icon>
+  <p>Todas as reservas que aguardam validação do promotor.Apenas reservas com teste de covid válido serão validadas.</p>
+</div>
+<div *ngFor="let ev of tickets">
+    <div *ngIf="ev.validado == false && ev.cancelado== false">
+      <div class="first-box">
+        <div>
+          <span class="title">Nº Pedido:</span>
+          <span class="detalhe">{{ ev._id }}</span>
+        </div>
+        <div>
+          <span class="title">Data da Compra:</span>
+          <span class="detalhe">{{ ev.dataCompra }}</span>
+        </div>
+      </div>
+      <div class="flex-row">
+      <div class="second-box">
+        <div class="row">
+          <span class="title">Evento/Espetáculo: </span>
+          <span class="detalhe">{{ ev.evento.nome }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Local:</span>
+          <span class="detalhe">{{ ev.evento.local }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Data de início:</span>
+          <span class="detalhe">{{ ev.evento.dataInicio }}</span>
+        </div>
+        <div class="row">
+          <span class="title">Data de fim:</span>
+          <span class="detalhe">{{ ev.evento.dataFim }}</span>
+        </div>
+      </div>
+  
+      <div class="flex-center">
+        <mat-card class="example-card" style="background-image: url('http://localhost:3000/posts/{{ev._id}}.png');">
+        </mat-card>
+        <span class="lbl-title">Submeter Teste Covid</span>
+        <div class="file-upload">
+          <input
+            type="file"
+            class="file-input"
+            name="postpromocional"
+            (change)="onFileSelected($event, ev._id)"
+            #fileUpload
+          />
+          <span class="lbl-attach">{{ fileName || "Nenhuma imagem selecionada." }}</span>
+
+          <button class="attach" (click)="fileUpload.click()">
+            <mat-icon> attach_file</mat-icon>
+          </button>
+        </div>
+
+        <p *ngIf="message">{{ message }}</p>
+      </div>
+    </div>
+    <form class="btn-cancelar">
+      <button type="submit" (click)="cancelar(ev._id)" mat-button>Cancelar Reserva</button>
+      </form>
+  </div>
+  </div>

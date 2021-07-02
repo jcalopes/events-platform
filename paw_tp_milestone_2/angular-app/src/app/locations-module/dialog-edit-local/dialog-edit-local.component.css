@@ -1,0 +1,26 @@
+.right-col{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+  }
+  
+  .flex-style{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .title{
+    font-family: Akzidenz, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color:rgb(33, 49, 60);
+  }
+
+  button{
+    border:1px solid rgb(33, 49, 60);
+    margin-right:5px;
+    height:35px;
+  }
+
+  button:hover{
+    color:white;
+    background-color: rgb(33, 49, 60);;
+  }
