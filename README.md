@@ -1,5 +1,5 @@
 # ticketSystem
-MEAN Stack Application -Web tickets application  
+MEAN Stack Application - Application to manage events and sales tickets using MEAN Stack.
 
 How to use:
 
